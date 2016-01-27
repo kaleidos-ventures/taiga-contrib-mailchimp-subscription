@@ -1,0 +1,21 @@
+{
+    "name": "taiga-contrib-mailchimp-subscription",
+    "version": "1.10.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/taigaio/taiga-contrib-mailchimp-subscription.git"
+    },
+    "license": "AGPL-3.0",
+    "author": "Taiga Agile LLC",
+    "scripts": {
+        "clean": "rm -rf dist || true",
+        "create-dist": "mkdir -p dist",
+        "copy-statics": "cp mailchimp-subscription.json dist/",
+        "build-coffee": "cat mailchimp-subscription.coffee | node_modules/coffee-script/bin/coffee --compile --stdio > dist/mailchimp-subscription.js",
+        "build": "npm run clean; npm run create-dist; npm run copy-statics; npm run build-coffee"
+    },
+    "dependencies": {
+        "coffee-script": "^1.10.0",
+        "node-sass": "^3.4.2"
+    }
+}
