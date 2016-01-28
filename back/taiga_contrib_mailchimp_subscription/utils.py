@@ -31,7 +31,7 @@ def suscribe_user(user, newsletter_id, mailchimp_api_key):
         m.lists.subscribe(id=newsletter_id,
             email={"email": user.email}, double_optin=False)
     except Exception as e:
-        logger.error("Mailchimp error on subscription: {}".format(str(e)))
+        logger.error("[Mailchimp] error on subscription: {}".format(str(e)))
 
 
 def unsuscribe_user(user, newsletter_id, mailchimp_api_key):
@@ -40,4 +40,4 @@ def unsuscribe_user(user, newsletter_id, mailchimp_api_key):
         m.lists.unsubscribe(id=newsletter_id,
             email={"email": user.email}, send_goodbye=False)
     except Exception as e:
-        logger.error("Mailchimp error on unsubscription: {}".format(str(e)))
+        logger.error("[Mailchimp] error on unsubscription: {}".format(str(e)))
