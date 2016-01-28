@@ -16,7 +16,9 @@ setup(
     license = 'AGPL',
     include_package_data = True,
     packages = find_packages(),
-    install_requires=[],
+    install_requires=[
+        "mailchimp == 2.0.9"
+    ],
     setup_requires = [
         'versiontools >= 1.8',
     ],

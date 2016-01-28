@@ -22,15 +22,6 @@ default_app_config = "taiga_contrib_mailchimp_subscription.apps.MailChimpSubscri
 
 from django.core import checks
 
-@checks.register()
-def check_mailchimp_installed(app_configs, **kwargs):
-    try:
-        import mailchimp
-    except ImportError:
-        return [checks.Error("mailchimp must be installed, check the requirements.txt",
-                             id="newsletter_subscription.A003")]
-    return []
-
 
 @checks.register()
 def check_mailchimp_api_key(app_configs, **kwargs):
