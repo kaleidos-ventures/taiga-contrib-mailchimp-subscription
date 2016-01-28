@@ -12,7 +12,7 @@ Installation
 In your Taiga back python virtualenv install the pip package `taiga-contrib-mailchimp-subscription` with:
 
 ```bash
-  pip install git+https://github.com/taigaio/taiga-contrib-mailchimp-subscription.git@stable
+  pip install -e "git+https://github.com/taigaio/taiga-contrib-mailchimp-subscription.git@stable#egg=taiga-contrib-mailchimp-subscription&subdirectory=back"
 ```
 
 Then modify your settings/local.py and include this line:
