@@ -27,6 +27,11 @@ def subscribe_to_newsletter(sender, **kwargs):
 
 def unsubscribe_from_newsletter(sender, **kwargs):
     user = kwargs["user"]
-    unsuscribe = kwargs.get("request_data", {}).get("unsuscribe", None)
+    request_data = kwargs.get("request_data", None)
+
+    if not request_data:
+        return
+
+    unsuscribe = request_data.get("unsuscribe", None)
     if unsuscribe is not None:
         unsuscribe_user(user, settings.MAILCHIMP_NEWSLETTER_ID, settings.MAILCHIMP_API_KEY)
