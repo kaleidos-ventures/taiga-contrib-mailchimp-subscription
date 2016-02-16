@@ -17,13 +17,11 @@
 
 from django.apps import AppConfig
 
-from taiga.auth.signals import user_registered as user_registered_signal
-from taiga.users.signals import user_cancel_account as user_cancel_account_signal
-
-from . import signal_handlers as handlers
-
 
 def connect_signals():
+    from taiga.auth.signals import user_registered as user_registered_signal
+    from taiga.users.signals import user_cancel_account as user_cancel_account_signal
+    from . import signal_handlers as handlers
     user_registered_signal.connect(handlers.subscribe_to_newsletter,
                                    dispatch_uid="subscribe_registered_user_to_newsletter")
     user_cancel_account_signal.connect(handlers.unsubscribe_from_newsletter,
@@ -31,6 +29,8 @@ def connect_signals():
 
 
 def disconnect_signals():
+    from taiga.auth.signals import user_registered as user_registered_signal
+    from taiga.users.signals import user_cancel_account as user_cancel_account_signal
     user_registered_signal.disconnect(dispatch_uid="subscribe_registered_user_to_newsletter")
     user_cancel_account_signal.disconnect(dispatch_uid="unsubscribe_user_from_newsletter")
 
