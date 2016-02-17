@@ -18,30 +18,3 @@
 __version__ = (2, 0, 0)
 
 default_app_config = "taiga_contrib_mailchimp_subscription.apps.MailChimpSubscriptionAppConfig"
-
-
-from django.core import checks
-
-
-@checks.register()
-def check_mailchimp_api_key(app_configs, **kwargs):
-    from django.conf import settings
-
-    mailchimp_api_key = getattr(settings, "MAILCHIMP_API_KEY", None)
-    if mailchimp_api_key is not None:
-        return []
-
-    return [checks.Error("MAILCHIMP_API_KEY must be set on settings",
-                         id="newsletter_subscription.A001")]
-
-
-@checks.register()
-def check_imailchimp_newsletter_id(app_configs, **kwargs):
-    from django.conf import settings
-
-    newsletter_id = getattr(settings, "MAILCHIMP_NEWSLETTER_ID", None)
-    if newsletter_id is not None:
-        return []
-
-    return [checks.Error("MAILCHIMP_NEWSLETTER_ID must be set on settings",
-                         id="newsletter_subscription.A002")]

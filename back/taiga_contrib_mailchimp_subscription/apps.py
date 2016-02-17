@@ -18,6 +18,33 @@
 from django.apps import AppConfig
 
 
+
+# Checks
+
+def check_mailchimp_api_key(app_configs, **kwargs):
+    from django.conf import settings
+
+    mailchimp_api_key = getattr(settings, "MAILCHIMP_API_KEY", None)
+    if mailchimp_api_key is not None:
+        return []
+
+    return [checks.Error("MAILCHIMP_API_KEY must be set on settings",
+                         id="newsletter_subscription.A001")]
+
+
+def check_mailchimp_newsletter_id(app_configs, **kwargs):
+    from django.conf import settings
+
+    newsletter_id = getattr(settings, "MAILCHIMP_NEWSLETTER_ID", None)
+    if newsletter_id is not None:
+        return []
+
+    return [checks.Error("MAILCHIMP_NEWSLETTER_ID must be set on settings",
+                         id="newsletter_subscription.A002")]
+
+
+# Signals
+
 def connect_signals():
     from taiga.auth.signals import user_registered as user_registered_signal
     from taiga.users.signals import user_cancel_account as user_cancel_account_signal
@@ -40,4 +67,8 @@ class MailChimpSubscriptionAppConfig(AppConfig):
     verbose_name = "MailChimp Subscription App Config"
 
     def ready(self):
+        from django.core.checks import register
+        register(check_mailchimp_api_key)
+        register(check_mailchimp_newsletter_id)
+
         connect_signals()

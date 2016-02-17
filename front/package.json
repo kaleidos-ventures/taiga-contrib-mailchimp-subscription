@@ -1,21 +1,32 @@
 {
     "name": "taiga-contrib-mailchimp-subscription",
     "version": "2.0.0",
+    "description": "Taiga contrib plugin to isubscribe and unsubscribe users to a mailchimp newsletter",
     "repository": {
         "type": "git",
         "url": "https://github.com/taigaio/taiga-contrib-mailchimp-subscription.git"
     },
-    "license": "AGPL-3.0",
+    "keywords": [
+        "taiga",
+        "mailchimp"
+    ],
     "author": "Taiga Agile LLC",
-    "scripts": {
-        "clean": "rm -rf dist || true",
-        "create-dist": "mkdir -p dist",
-        "copy-statics": "cp mailchimp-subscription.json dist/",
-        "build-coffee": "cat mailchimp-subscription.coffee | node_modules/coffee-script/bin/coffee --compile --stdio > dist/mailchimp-subscription.js",
-        "build": "npm run clean; npm run create-dist; npm run copy-statics; npm run build-coffee"
+    "license": "AGPL-3.0",
+    "bugs": {
+        "url": "https://github.com/taigaio/taiga-contrib-mailchimp-subscription/issues"
     },
+    "homepage": "https://github.com/taigaio/taiga-contrib-mailchimp-subscription",
     "dependencies": {
-        "coffee-script": "^1.10.0",
-        "node-sass": "^3.4.2"
+        "coffee-script": "^1.10.0"
+    },
+    "devDependencies": {
+        "gulp": "^3.9.0",
+        "gulp-cached": "^1.1.0",
+        "gulp-coffee": "^2.3.1",
+        "gulp-concat": "^2.6.0",
+        "gulp-load-plugins": "^1.2.0",
+        "gulp-plumber": "^1.0.1",
+        "gulp-remember": "^0.3.0",
+        "gulp-uglify": "^1.5.2"
     }
 }

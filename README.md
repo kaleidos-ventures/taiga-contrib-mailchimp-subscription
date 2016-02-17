@@ -25,8 +25,6 @@ Then modify your `settings/local.py` and include this line:
   INSTALLED_APPS += ["taiga_contrib_mailchimp_subscription"]
 ```
 
-Then run the migrations to generate the new need table:
-
 
 #### Taiga Front
 
@@ -54,13 +52,12 @@ Include in your `dist/conf.json` in the `contribPlugins` list the value `"/plugi
 
 #### Taiga Back
 
+Clone the repo and
+
 ```bash
-  cd taiga
-  workon taiga
-  git clone git@github.com:taigaio/taiga-contrib-mailchimp-subscription.git
   cd taiga-contrib-mailchimp-subscription/back
-  pip install --editable .
-  
+  workon taiga
+  pip install -e .
 ```
 
 Then modify your `taiga-back/settings/local.py` and include this line:
@@ -75,10 +72,17 @@ Then modify your `taiga-back/settings/local.py` and include this line:
 #### Taiga Front
 
 ```bash
-  cd taiga-front-dist
+  npm install
+  gulp
+```
+
+Link `dist` in `taiga-front` plugins directory:
+
+```bash
+  cd taiga-front/dist
   mkdir -p plugins
   cd plugins
-  ln -s ../../../taiga-contrib-mailchimp-subscription/front/dist mailchimp-subscription 
+  ln -s ../../../taiga-contrib-mailchimp-subscription/front/dist mailchimp-subscription
 ```
 
 Include in your `dist/conf.json` in the `contribPlugins` list the value `"/plugins/mailchimp-subscription/mailchimp-subscription.json"`:
@@ -90,6 +94,13 @@ Include in your `dist/conf.json` in the `contribPlugins` list the value `"/plugi
         "/plugins/mailchimp-subscription/mailchimp-subscription.json"
     ]
 ...
+```
+
+If you only want to build `dist` use:
+
+```bash
+  npm install
+  gulp build
 ```
 
 Tests
