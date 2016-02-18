@@ -16,7 +16,7 @@ In your Taiga back python virtualenv install the pip package `taiga-contrib-mail
   pip install -e "git+https://github.com/taigaio/taiga-contrib-mailchimp-subscription.git@stable#egg=taiga-contrib-mailchimp-subscription&subdirectory=back"
 ```
 
-Then modify your `settings/local.py` and include this line:
+Then modify in `taiga-back` your `settings/local.py` and include this line:
 
 ```python
   MAILCHIMP_NEWSLETTER_ID = "my-newsletter"
@@ -60,7 +60,7 @@ Clone the repo and
   pip install -e .
 ```
 
-Then modify your `taiga-back/settings/local.py` and include this line:
+Then modify in `taiga-back` your `settings/local.py` and include this line:
 
 ```python
   MAILCHIMP_NEWSLETTER_ID = "my-newsletter"
@@ -71,12 +71,7 @@ Then modify your `taiga-back/settings/local.py` and include this line:
 
 #### Taiga Front
 
-```bash
-  npm install
-  gulp
-```
-
-Link `dist` in `taiga-front` plugins directory:
+After clone the repo link `dist` in `taiga-front` plugins directory:
 
 ```bash
   cd taiga-front/dist
@@ -96,12 +91,16 @@ Include in your `dist/conf.json` in the `contribPlugins` list the value `"/plugi
 ...
 ```
 
-If you only want to build `dist` use:
+In the plugin source dir `taiga-contrib-mailchimp-subscription` run
 
 ```bash
-  npm install
-  gulp build
+npm install
 ```
+and use:
+
+- `gulp` to regenerate the source and watch for changes.
+- `gulp build` to only regenerate the source.
+
 
 Tests
 -----
