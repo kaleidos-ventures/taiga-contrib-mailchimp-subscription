@@ -26,11 +26,12 @@ template = """
     <span class="icon icon-delete"></span>
 </a>
 <form>
-    <h2 class="title", translate="LIGHTBOX.DELETE_ACCOUNT.SECTION_NAME"></h2>
+    <h2 class="title", translate="LIGHTBOX.DELETE_ACCOUNT.CONFIRM"></h2>
     <p>
-        <span class="question" translate="LIGHTBOX.DELETE_ACCOUNT.CONFIRM"></span>
         <span class="subtitle" translate="LIGHTBOX.DELETE_ACCOUNT.SUBTITLE"></span>
     </p>
+
+    <p ng-bind-html="'LIGHTBOX.DELETE_ACCOUNT.BLOCK_PROJECT' | translate"></p>
 
     <div class="newsletter">
         <input name="unsuscribe", type="checkbox", id="unsuscribe" />
@@ -38,10 +39,10 @@ template = """
     </div>
 
     <div class="options">
-        <a class="button-green" href="" title="{{'COMMON.ACCEPT' | translate}}")>
-            <span translate="COMMON.ACCEPT"></span>
-        <a class="button-red" href="" title="{{'COMMON.CANCEL' | translate}}">
-            <span translate="COMMON.CANCEL"></span>
+        <a class="button-green" href="" title="{{'LIGHTBOX.DELETE_ACCOUNT.CANCEL' | translate}}")>
+            <span translate="LIGHTBOX.DELETE_ACCOUNT.CANCEL"></span>
+        <a class="button-red" href="" title="{{'LIGHTBOX.DELETE_ACCOUNT.ACCEPT' | translate}}">
+            <span translate="LIGHTBOX.DELETE_ACCOUNT.ACCEPT"></span>
         </a>
     </div>
 </form>
@@ -85,11 +86,11 @@ decorator = [
                     promise.then null, ->
                         console.log "FAIL"
 
-                $el.on "click", ".button-red", (event) ->
+                $el.on "click", ".button-green", (event) ->
                     event.preventDefault()
                     lightboxService.close($el)
 
-                $el.on "click", ".button-green", window.taiga.debounce 2000, (event) ->
+                $el.on "click", ".button-red", window.taiga.debounce 2000, (event) ->
                     event.preventDefault()
                     submit()
 
