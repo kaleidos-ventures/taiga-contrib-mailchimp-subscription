@@ -32,7 +32,7 @@ decorator = [
     ($delegate, $repo, $auth, $location, $navUrls, lightboxService) ->
         directive = $delegate[0]
 
-        directive.templateUrl = "plugins/mailchimp-subscriptions/mailchimp-subscriptions.html"
+        directive.templateUrl = "plugins/mailchimp-subscription/mailchimp-subscription.html"
 
         directive.compile = () ->
             return ($scope, $el, $attrs) ->
