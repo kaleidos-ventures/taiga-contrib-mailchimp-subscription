@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
+var merge = require('merge-stream');
 
 var paths = {
     jade: 'partials/*.jade',
@@ -12,30 +13,33 @@ gulp.task('copy-config', function() {
         .pipe(gulp.dest(paths.dist));
 });
 
-gulp.task('compile-jade', function() {
-    return gulp.src(paths.jade)
+gulp.task('compile', function() {
+    var jade = gulp.src(paths.jade)
         .pipe($.plumber())
         .pipe($.cached('jade'))
         .pipe($.jade({pretty: true}))
-        .pipe($.remember('jade'))
-        .pipe(gulp.dest(paths.dist));
-});
+        .pipe($.angularTemplatecache({
+            transformUrl: function(url) {
+                return 'plugins/mailchimp-subscription/' + url;
+            }
+        }))
+        .pipe($.remember('jade'));
 
-gulp.task('compile-coffee', function() {
-    return gulp.src(paths.coffee)
+    var coffee = gulp.src(paths.coffee)
         .pipe($.plumber())
         .pipe($.cached('coffee'))
         .pipe($.coffee())
-        .pipe($.remember('coffee'))
+        .pipe($.remember('coffee'));
+
+    return merge(jade, coffee)
         .pipe($.concat('mailchimp-subscription.js'))
         .pipe($.uglify({mangle:false, preserveComments: false}))
         .pipe(gulp.dest(paths.dist));
 });
 
 gulp.task('watch', function() {
-    gulp.watch([paths.jade], ['compile-jade']);
-    gulp.watch([paths.coffee], ['compile-coffee']);
+    gulp.watch([paths.jade, paths.coffee], ['compile']);
 });
 
-gulp.task('default', ['copy-config', 'compile-jade', 'compile-coffee', 'watch']);
-gulp.task('build', ['copy-config', 'compile-jade', 'compile-coffee']);
+gulp.task('default', ['copy-config', 'compile', 'watch']);
+gulp.task('build', ['copy-config', 'compile']);
