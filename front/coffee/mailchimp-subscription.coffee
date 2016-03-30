@@ -21,32 +21,6 @@
 #
 # File: mailchimp-subscription.coffee
 ###
-template = """
-<a class="close" href="" title="close">
-    <span class="icon icon-delete"></span>
-</a>
-<form>
-    <h2 class="title", translate="LIGHTBOX.DELETE_ACCOUNT.CONFIRM"></h2>
-    <p>
-        <span class="subtitle" translate="LIGHTBOX.DELETE_ACCOUNT.SUBTITLE"></span>
-    </p>
-
-    <p ng-bind-html="'LIGHTBOX.DELETE_ACCOUNT.BLOCK_PROJECT' | translate"></p>
-
-    <div class="newsletter">
-        <input name="unsuscribe", type="checkbox", id="unsuscribe" />
-        <label for="unsuscribe" translate="LIGHTBOX.DELETE_ACCOUNT.NEWSLETTER_LABEL_TEXT"></label>
-    </div>
-
-    <div class="options">
-        <a class="button-green" href="" title="{{'LIGHTBOX.DELETE_ACCOUNT.CANCEL' | translate}}")>
-            <span translate="LIGHTBOX.DELETE_ACCOUNT.CANCEL"></span>
-        <a class="button-red" href="" title="{{'LIGHTBOX.DELETE_ACCOUNT.ACCEPT' | translate}}">
-            <span translate="LIGHTBOX.DELETE_ACCOUNT.ACCEPT"></span>
-        </a>
-    </div>
-</form>
-"""
 
 decorator = [
     '$delegate',
@@ -58,8 +32,7 @@ decorator = [
     ($delegate, $repo, $auth, $location, $navUrls, lightboxService) ->
         directive = $delegate[0]
 
-        directive.template = template
-        directive.templateUrl = null
+        directive.templateUrl = "plugins/mailchimp-subscriptions/mailchimp-subscriptions.html"
 
         directive.compile = () ->
             return ($scope, $el, $attrs) ->
