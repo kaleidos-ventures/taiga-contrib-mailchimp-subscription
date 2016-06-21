@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
+import versiontools_support
 from setuptools import setup, find_packages
 
 setup(
@@ -19,9 +19,7 @@ setup(
     install_requires=[
         "mailchimp == 2.0.9"
     ],
-    setup_requires = [
-        'versiontools >= 1.8',
-    ],
+    setup_requires = [],
     classifiers = [
         'Programming Language :: Python',
         'Development Status :: 4 - Beta',
