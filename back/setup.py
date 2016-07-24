@@ -19,7 +19,9 @@ setup(
     install_requires=[
         "mailchimp == 2.0.9"
     ],
-    setup_requires = [],
+    setup_requires = [
+        'versiontools >= 1.9',
+    ],
     classifiers = [
         'Programming Language :: Python',
         'Development Status :: 4 - Beta',
