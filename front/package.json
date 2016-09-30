@@ -1,6 +1,6 @@
 {
   "name": "taiga-contrib-mailchimp-subscription",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Taiga contrib plugin to isubscribe and unsubscribe users to a mailchimp newsletter",
   "repository": {
     "type": "git",
